@@ -19,7 +19,7 @@ doctl compute droplet list \
 --format PublicIPv4,PublicIPv6 | lolcat --animate --speed=60
 printf "\n🎀 waiting for droplet to accept inbound connections 🎀\n\n" | lolcat --animate --speed=1
 shelladdr=`doctl compute droplet list josh --format PublicIPv4 --no-header`
-sleep 60
+sleep 90
 printf "⏰ init. custom provisioning - this will take a few mins ⏰\n\n" | lolcat --animate --speed=15
 ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t \
 root@$shelladdr "mkdir /tmp/j && git clone https://github.com/joshhighet/j.git /tmp/j --quiet && cd /tmp/j && chmod +x j.sh && ./j.sh"
