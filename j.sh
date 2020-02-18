@@ -74,6 +74,6 @@ sudo ufw allow ssh > /dev/null
 #tree /home/josh
 #ufw status verbose
 #printf "`echo $HOSTNAME` restarting - reshell w/\nssh josh@` curl -s ipinfo.io/ip`\n"
-runuser -l josh -c 'echo "configured with https://github.com/joshhighet/j/blob/master/j.sh" | tee /home/josh/.jsh'
+runuser -l josh -c 'echo "configured with https://github.com/joshhighet/j/blob/master/j.sh" | tee /home/josh/.jsh | lolcat'
 printf "\n"
 sudo reboot
