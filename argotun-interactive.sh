@@ -2,6 +2,14 @@
 #joshhighet
 #cloudflared dual-argo-tunnel setup [interactive] [debian]
 loglevel=warn
+####################
+#preliminary checks#
+####################
+printf "checking privs\n\n"
+if [ "$EUID" -ne 0 ]
+  then echo "script needs root privs"
+  exit
+fi
 #https tunnel
 echo "primary FQDN [i.e bikinibottom.joshhighet.com]" && read hostname
 echo "local binding URL [i.e https://localhost:8000]" && read url
@@ -12,14 +20,6 @@ echo "secondary FQDN for SSH [i.e ssh-bikinibottom.joshhighet.com]" && read sshh
 echo "tag [i.e bikinibottom=ssh] - enter for no tags" && read tag
 sshurl="ssh://localhost:22"
 sshlogfile="/var/log/cloudflared-ssh.log"
-####################
-#preliminary checks#
-####################
-printf "checking privs\n\n"
-if [ "$EUID" -ne 0 ]
-  then echo "script needs root privs"
-  exit
-fi
 ########################
 #begin primary install #
 ########################
@@ -28,7 +28,7 @@ printf "creating cloudflared home directory\n\n"
 mkdir /etc/cloudflared
 
 printf "downloading cloudflared\n\n"
-wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb \
+wget --quiet https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb \
 -O /etc/cloudflared/cloudflared.deb
 
 printf "installing cloudflared\n\n"
@@ -64,7 +64,7 @@ printf "creating cloudflared-ssh home directory\n\n"
 mkdir /etc/cloudflared-ssh
 
 printf "downloading cloudflared-ssh\n\n"
-wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz \
+wget --quiet https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz \
 -O /etc/cloudflared-ssh/cloudflared.tgz
 
 printf "unpacking cloudflared-ssh tarball\n\n"
@@ -96,7 +96,7 @@ After=network.target
 [Service]
 TimeoutStartSec=0
 Type=notify
-ExecStart=/etc/cloudflared-ssh/cloudflared --config /etc/cloudflared-ssh/config.yml --origincert /etc/cloudflared/cert.pem --no-autoupdate
+ExecStart=/etc/cloudflared-ssh/cloudflared --config /etc/cloudflared-ssh/config.yml --origincert /home/josh/.cloudflared/cert.pem --no-autoupdate
 Restart=on-failure
 RestartSec=5s
 

@@ -38,7 +38,7 @@ printf "creating cloudflared home directory\n\n"
 mkdir /etc/cloudflared
 
 printf "downloading cloudflared\n\n"
-wget https://bin.equinox.io/c/[TBD] \
+wget --quiet https://bin.equinox.io/c/[TBD] \
 -O /etc/cloudflared/[TBD]
 
 printf "installing cloudflared\n\n"
@@ -83,7 +83,7 @@ printf "creating cloudflared-ssh home directory\n\n"
 mkdir /etc/cloudflared-ssh
 
 printf "downloading cloudflared-ssh\n\n"
-wget https://bin.equinox.io/c/[TBD] \
+wget --quiet https://bin.equinox.io/c/[TBD] \
 -O /etc/[TBD]
 
 printf "unpacking cloudflared-ssh tarball\n\n"
