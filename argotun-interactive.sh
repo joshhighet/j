@@ -73,7 +73,7 @@ touch $sshlogfile
 #printf "populating cloudflared-ssh config file\n\n"
 echo "hostname: $sshhostname" > /etc/cloudflared-ssh/config.yml
 echo "url: $sshurl" >> /etc/cloudflared-ssh/config.yml
-echo "logfile: $logfile" >> /etc/cloudflared-ssh/config.yml
+echo "logfile: $sshlogfile" >> /etc/cloudflared-ssh/config.yml
 echo "loglevel: $loglevel" >> /etc/cloudflared/config.yml
 echo "tunnel_tag: $sshtag" >> /etc/cloudflared-ssh/config.yml
 echo "pidfile: /etc/cloudflared-ssh/pid" >> /etc/cloudflared-ssh/config.yml
@@ -113,15 +113,13 @@ Description=Update Argo Tunnel
 After=network.target
 
 [Service]
-ExecStart=/bin/bash -c '/usr/local/bin/cloudflared update; code=$?; if [ $code -eq 64 ]; then systemctl restart cloudflared; exit 0; fi; exit $code'""" \
+ExecStart=/bin/bash -c '/etc/cloudflared-ssh/cloudflared update; code=$?; if [ $code -eq 64 ]; then systemctl restart cloudflared-ssh; exit 0; fi; exit $code'""" \
 > /etc/systemd/system/cloudflared-ssh-update.service
 chmod 644 /etc/systemd/system/cloudflared-ssh.service
 chmod 644 /etc/systemd/system/cloudflared-ssh-update.timer
 chmod 644 /etc/systemd/system/cloudflared-ssh-update.service
-systemctl enable cloudflared-ssh.service
-systemctl enable cloudflared-ssh-update.timer
-systemctl start cloudflared-ssh.service
-systemctl start cloudflared-ssh-update.timer
-systemctl start cloudflared-ssh-update.service
-systemctl status cloudflared
-systemctl status cloudflared-ssh
+systemctl enable cloudflared-ssh.service --quiet
+systemctl enable cloudflared-ssh-update.timer --quiet
+systemctl start cloudflared-ssh.service --quiet
+systemctl start cloudflared-ssh-update.timer --quiet
+systemctl start cloudflared-ssh-update.service --quiet
