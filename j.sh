@@ -25,6 +25,7 @@ runuser -l josh -c 'touch /home/josh/.ssh/authorized_keys'
 runuser -l josh -c 'curl -s -L joshhighet.com/ssh > /home/josh/.ssh/authorized_keys'
 printf "id_rsa\n"
 runuser -l josh -c 'ssh-keygen -t rsa -b 4096 -C "autodep@joshhighet.com" -f /home/josh/.ssh/id_rsa -q'
+printf "\n"
 curl  -s -C - https://pkg.cloudflare.com/pubkey.gpg | sudo apt-key add -
 sudo echo 'deb http://pkg.cloudflare.com/ xenial main' >> /etc/apt/sources.list.d/cloudflare-main.list
 sudo apt-get -qq update -y > /dev/null
@@ -72,7 +73,7 @@ sudo ufw allow ssh > /dev/null
 #clear
 #tree /home/josh
 #ufw status verbose
-printf "`echo $HOSTNAME` restarting - reshell w/\nssh josh@` curl -s ipinfo.io/ip`\n"
+#printf "`echo $HOSTNAME` restarting - reshell w/\nssh josh@` curl -s ipinfo.io/ip`\n"
 runuser -l josh -c 'echo "configured with https://github.com/joshhighet/j/blob/master/j.sh" | tee /home/josh/.jsh'
 printf "\n"
 sudo reboot
