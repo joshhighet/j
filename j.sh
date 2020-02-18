@@ -9,9 +9,10 @@ if ! [ "$(id -u)" = 0 ]; then
 fi
 #################################################################################
 printf "\n"
-echo 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE !$H+H*' | tee /etc/motd
+sudo echo 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE !$H+H*' > /etc/motd
 printf "\n"
-adduser josh --gecos ""
+adduser josh --quiet --gecos ""
+printf "password\n"
 usermod -aG sudo josh
 runuser -l josh -c 'mkdir /home/josh/.ssh'
 runuser -l josh -c 'touch /home/josh/.ssh/authorized_keys'
@@ -23,13 +24,13 @@ runuser -l josh -c 'touch /home/josh/.ssh/authorized_keys'
 #and http.request.uri.path eq "/ssh")#
 ######################################
 runuser -l josh -c 'curl -s -L joshhighet.com/ssh > /home/josh/.ssh/authorized_keys'
-printf "ssh key password:\n"
+printf "ssh password\n"
 runuser -l josh -c 'ssh-keygen -t rsa -b 4096 -C "autodep@joshhighet.com" -f /home/josh/.ssh/id_rsa -q'
 curl  -s -C - https://pkg.cloudflare.com/pubkey.gpg | sudo apt-key add -
 sudo echo 'deb http://pkg.cloudflare.com/ xenial main' >> /etc/apt/sources.list.d/cloudflare-main.list
 sudo apt-get -qq update -y > /dev/null
 sudo apt-get -qq upgrade -y > /dev/null
-sudo apt install -y \
+sudo apt-get install -y \
 jq \
 ufw \
 zsh \
@@ -48,8 +49,8 @@ python3-pip \
 python3-virtualenv \
 unattended-upgrades \
 -qq > /dev/null
-sudo apt -qq autoclean -y > /dev/null
-sudo apt -qq autoremove -y > /dev/null
+sudo apt-get -qq autoclean -y > /dev/null
+sudo apt-get -qq autoremove -y > /dev/null
 cat /tmp/j/alias.zshrc >> /home/josh/.bashrc
 chown -R josh:josh /home/josh
 source /home/josh/.bashrc
