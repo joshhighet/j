@@ -10,9 +10,8 @@ fi
 #################################################################################
 printf "\n"
 sudo echo 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE !$H+H*' > /etc/motd
-printf "\n"
 adduser josh --quiet --gecos ""
-printf "password\n"
+printf "\n"
 usermod -aG sudo josh
 runuser -l josh -c 'mkdir /home/josh/.ssh'
 runuser -l josh -c 'touch /home/josh/.ssh/authorized_keys'
@@ -24,7 +23,7 @@ runuser -l josh -c 'touch /home/josh/.ssh/authorized_keys'
 #and http.request.uri.path eq "/ssh")#
 ######################################
 runuser -l josh -c 'curl -s -L joshhighet.com/ssh > /home/josh/.ssh/authorized_keys'
-printf "ssh password\n"
+printf "id_rsa\n"
 runuser -l josh -c 'ssh-keygen -t rsa -b 4096 -C "autodep@joshhighet.com" -f /home/josh/.ssh/id_rsa -q'
 curl  -s -C - https://pkg.cloudflare.com/pubkey.gpg | sudo apt-key add -
 sudo echo 'deb http://pkg.cloudflare.com/ xenial main' >> /etc/apt/sources.list.d/cloudflare-main.list
