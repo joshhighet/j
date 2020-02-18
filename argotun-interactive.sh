@@ -5,9 +5,8 @@ loglevel=warn
 ####################
 #preliminary checks#
 ####################
-printf "checking privs\n\n"
 if [ "$EUID" -ne 0 ]
-  then echo "script needs root privs"
+  then echo "argo setup needs root!"
   exit
 fi
 #https tunnel
@@ -29,10 +28,10 @@ mkdir /etc/cloudflared
 
 printf "downloading cloudflared\n\n"
 wget --quiet https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb \
--O /etc/cloudflared/cloudflared.deb
+-O /tmp/cloudflared.deb
 
 printf "installing cloudflared\n\n"
-sudo dpkg -i /etc/cloudflared/[TBD]
+sudo dpkg -i /tmp/cloudflared.deb
 
 printf "creating cloudflared config file\n\n"
 touch /etc/cloudflared/config.yml
