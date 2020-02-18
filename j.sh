@@ -23,7 +23,7 @@ runuser -l josh -c 'touch /home/josh/.ssh/authorized_keys'
 #and http.request.uri.path eq "/ssh")#
 ######################################
 runuser -l josh -c 'curl -s -L joshhighet.com/ssh > /home/josh/.ssh/authorized_keys'
-printf "id_rsa\n"
+printf "🔒 id_rsa\n"
 runuser -l josh -c 'ssh-keygen -t rsa -b 4096 -C "autodep@joshhighet.com" -f /home/josh/.ssh/id_rsa -q'
 curl  -s -C - https://pkg.cloudflare.com/pubkey.gpg | sudo apt-key add -
 printf "\n"
