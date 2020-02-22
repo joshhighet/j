@@ -12,6 +12,11 @@ if [ "$EUID" -ne 0 ]
   then echo "argo setup needs root!"
   exit
 fi
+#check response code from cloudflare
+if [[ $(curl -s -I https://dash.cloudflare.com | head -n 1) = *401 ]]; then
+  printf "unable to reach cloudflare to continue setup\n"
+  exit
+fi
 #
 [ -d "/etc/cloudflared" ] && echo "/etc/cloudflared already exists!" && exit
 [ -d "/etc/cloudflared-ssh" ] && echo "/etc/cloudflared-ssh already exists" && exit
