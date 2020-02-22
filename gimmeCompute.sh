@@ -65,22 +65,31 @@ fi
 sleep 90
 #########
 printf "⏰ init. custom provisioning - this will take a few mins ⏰\n\n" | lolcat --animate --speed=15
-ticker=0;
-until ssh \
+ssh \
 -o UserKnownHostsFile=/dev/null \
 -o StrictHostKeyChecking=no \
--t root@$shelladdr $postboot_command|| [ $ticker -eq 20 ]; \
-do sleep 1; (( COUNT++ )); done
+-t root@$shelladdr $postboot_command
+#ticker=0;
+#until ssh \
+#-o UserKnownHostsFile=/dev/null \
+#-o StrictHostKeyChecking=no \
+#-t root@$shelladdr $postboot_command || [ $ticker -eq 1 ]; \
+#do sleep 1; (( COUNT++ )); done
 printf "\n🏁 all done - droplet restarting - standby 🏁\n\n" | lolcat --animate --speed=15
 #########
 sleep 35
 #########
-ticker=0;
-until ssh \
+ssh \
 -o UserKnownHostsFile=/dev/null \
 -o StrictHostKeyChecking=no \
--t $provision_user@$shelladdr || [ $ticker -eq 20 ]; \
-do sleep 1; (( COUNT++ )); done
+-t $provision_user@$shelladdr
+#ticker=0;
+#echo $provision_user
+#until ssh \
+#-o UserKnownHostsFile=/dev/null \
+#-o StrictHostKeyChecking=no \
+#-t $provision_user@$shelladdr || [ $ticker -eq 1 ]; \
+#do sleep 1; (( COUNT++ )); done
 #########
 printf "\n 👋 🛑 ✋ "
 doctl compute droplet delete $droplet_name
