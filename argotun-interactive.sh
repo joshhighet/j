@@ -30,11 +30,11 @@ fi
 addgroup cloudflared-grp \
 --quiet
 #add user "cloudflared" without home directory or interactive capabilities
+#--disabled-login \
+#--disabled-password \
 adduser \
 --quiet \
 --gecos "" \
---disabled-login \
---disabled-password \
 --ingroup cloudflared-grp \
 cloudflared
 #https tunnel
