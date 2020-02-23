@@ -23,7 +23,7 @@ fi
 #check if folder structure pre-existing as some changes below will make resursive changes
 [ -d "/etc/cloudflared" ] && echo "/etc/cloudflared already exists!" && exit
 [ -d "/etc/cloudflared-ssh" ] && echo "/etc/cloudflared-ssh already exists" && exit
-#ceck if user we plan to create for isolated service exists already
+#check if user we plan to create for isolated service exists already
 getent passwd $serviceuser > /dev/null 2&>1
 if [ $? -eq 0 ]; then
     printf "user $serviceuser already exists\n"
@@ -160,10 +160,7 @@ runuser -l $serviceuser -c '/usr/local/bin/cloudflared login'
 #test
 exit
 #test
-systemctl enable cloudflared-ssh.service --quiet
-systemctl enable cloudflared-ssh-update.timer --quiet
-systemctl start cloudflared-ssh.service --quiet
-systemctl start cloudflared-ssh-update.timer --quiet
-systemctl start cloudflared-ssh-update.service --quiet
-#printf "enabling cloudflared as boot-start service\n\n"
-#runuser -l cloudflared -c '/usr/local/bin/cloudflared service install'
+systemctl start cloudflared
+systemctl start cloudflared-ssh
+systemctl enable cloudflared --quiet
+systemctl enable cloudflared-ssh --quiet
