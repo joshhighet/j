@@ -158,8 +158,6 @@ runuser -l $serviceuser -c '/usr/local/bin/cloudflared-ssh update'
 #printf "authenticating argo tunnel\n\n"
 runuser -l $serviceuser -c '/usr/local/bin/cloudflared login'
 #test
-exit
-#test
 systemctl start cloudflared
 systemctl start cloudflared-ssh
 systemctl enable cloudflared --quiet
