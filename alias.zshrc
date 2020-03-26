@@ -13,13 +13,16 @@ alias die="pmset displaysleepnow"
 alias extip="curl -s ifconfig.co"
 alias pubkey="cat ~/.ssh/id_rsa.pub"
 alias extip-info="curl -s ipinfo.io | jq"
+alias splunk=/Applications/Splunk/bin/splunk
 alias ipcity=`curl -s ipinfo.io | jq '.city' -r`
 alias ports="sudo lsof -iTCP -sTCP:LISTEN -n -P"
 alias shodanme='shodan host `curl -s ipinfo.io/ip`'
 alias ipregion=`curl -s ipinfo.io | jq '.region' -r`
 alias ipcountry=`curl -s ipinfo.io | jq '.country' -r`
 alias cloudflaredssh="cloudflared access ssh-config --hostname"
+alias firefox="/Applications/Firefox.app/Contents/MacOS/firefox"
 alias tor="'/Applications/Tor Browser.app/Contents/MacOS/firefox'"
+alias checkra1n="/Applications/checkra1n.app/Contents/MacOS/checkra1n"
 alias intip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2"
 alias google='{read -r arr; open "https://google.com/search?q=${arr}";} <<<'
 alias ipgrepv6="grep -o '^\([0-9a-fA-F]\{0,4\}:\)\{1,7\}[0-9a-fA-F]\{0,4\}$'"
