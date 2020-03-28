@@ -25,6 +25,7 @@ alias tor="'/Applications/Tor Browser.app/Contents/MacOS/firefox'"
 alias checkra1n="/Applications/checkra1n.app/Contents/MacOS/checkra1n"
 alias intip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2"
 alias google='{read -r arr; open "https://google.com/search?q=${arr}";} <<<'
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 alias ipgrepv6="grep -o '^\([0-9a-fA-F]\{0,4\}:\)\{1,7\}[0-9a-fA-F]\{0,4\}$'"
 alias privileges='/Applications/Privileges.app/Contents/Resources/PrivilegesCLI'
 alias freewilly='docker rm $(docker ps -a -q) && docker stop $(docker ps -a -q)'
