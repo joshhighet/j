@@ -1,36 +1,29 @@
-#PS1='[`date  +"%d-%b-%y %T"`] > '  test "$(ps -ocommand= -p $PPID | awk '{print $1}')" == 'script' || (script -f $HOME/logs/$(date +"%d-%b-%y_%H-%M-%S")_shell.log)
-alias q='exit'
-alias c='clear'
-alias r='reset'
+#path traversals
 alias ..='cd ..'
 alias cd..="cd .."
 alias ...='cd ../..'
-alias ll="ls -laFTrth"
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-alias die="pmset displaysleepnow"
-alias extip="curl -s ifconfig.co"
+#generic shortcuts
+alias ll="ls -laFTrth"
 alias pubkey="cat ~/.ssh/id_rsa.pub"
-alias extip-info="curl -s ipinfo.io | jq"
-alias splunk=/Applications/Splunk/bin/splunk
-alias ipcity=`curl -s ipinfo.io | jq '.city' -r`
-alias ports="sudo lsof -iTCP -sTCP:LISTEN -n -P"
-alias shodanme='shodan host `curl -s ipinfo.io/ip`'
-alias ipregion=`curl -s ipinfo.io | jq '.region' -r`
-alias ipcountry=`curl -s ipinfo.io | jq '.country' -r`
-alias cloudflaredssh="cloudflared access ssh-config --hostname"
-alias firefox="/Applications/Firefox.app/Contents/MacOS/firefox"
-alias tor="'/Applications/Tor Browser.app/Contents/MacOS/firefox'"
-alias checkra1n="/Applications/checkra1n.app/Contents/MacOS/checkra1n"
-alias intip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2"
+#application specific
+alias splunk='/Applications/Splunk/bin/splunk'
+alias cloudflaredssh='cloudflared access ssh-config --hostname'
+alias tor='/Applications/Tor Browser.app/Contents/MacOS/firefox'
+alias firefox='/Applications/Firefox.app/Contents/MacOS/firefox'
+alias checkra1n='/Applications/checkra1n.app/Contents/MacOS/checkra1n'
 alias google='{read -r arr; open "https://google.com/search?q=${arr}";} <<<'
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+#networking
+alias myip-json="curl -s ipinfo.io | jq"
+alias ports="sudo lsof -iTCP -sTCP:LISTEN -n -P"
+alias ip='{read -r arr; curl "ip-api.com/${arr}";} <<<'
+alias intip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\  -f2"
 alias ipgrepv6="grep -o '^\([0-9a-fA-F]\{0,4\}:\)\{1,7\}[0-9a-fA-F]\{0,4\}$'"
-alias privileges='/Applications/Privileges.app/Contents/Resources/PrivilegesCLI'
-alias freewilly='docker rm $(docker ps -a -q) && docker stop $(docker ps -a -q)'
-alias mailgrep='grep -E -o "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b"'
 alias ipgrepv4="grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'"
-#alias intip='ip addr show | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p''
-alias startup='echo "git clone https://github.com/joshhighet/j.git && cd j && chmod +x j.sh && ./j.sh"'
+alias myip='curl -s ipinfo.io | jq .ip,.city,.country,.org -r | cowsay | lolcat --animate --speed=150'
 alias ipgrep="grep -o -e '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' -e '^\([0-9a-fA-F]\{0,4\}:\)\{1,7\}[0-9a-fA-F]\{0,4\}$'"
+#whois -h whois.radb.net -- '-i origin 12345' | grep -Eo "([0-9.]+){4}/[0-9]+" | sort -n | uniq -c | cut -d ' ' -f5
+#PS1='[`date  +"%d-%b-%y %T"`] > '  test "$(ps -ocommand= -p $PPID | awk '{print $1}')" == 'script' || (script -f $HOME/logs/$(date +"%d-%b-%y_%H-%M-%S")_shell.log)
