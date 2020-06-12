@@ -11,7 +11,7 @@ adduser $USER --gecos \
 --disabled-password
 echo "$USER:$PASS" | chpasswd
 mkdir -p /home/$USER/.ssh
-curl -L $SSHKEYLOC \
+curl -s -L $SSHKEYLOC \
 | tee /home/$USER/.ssh/authorized_keys
 chown -R $USER:$USER /home/$USER
 usermod -aG sudo $USER
